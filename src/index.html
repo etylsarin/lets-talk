@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Let's Talk!</title>
+</head>
+<body>
+  <div class="page-wrapper">
+    <iframe src=""></iframe>
+    <input id="monster" type="checkbox" class="hidden" />
+    <label for="monster" class="monster"><span class="sr-only">Show chat</span></label>
+    <div class="chat">
+      <div class="panel panel-info">
+        <div class="panel-heading">Recent chat history</div>
+        <div id="infinite-scroll" class="panel-body">
+          <ul id="msg-output" class="media-list"></ul>
+        </div>
+        <div class="panel-footer">
+          <form id="chat-form">
+            <div class="input-group">
+              <input name="speech-msg" id="msg-input" type="text" class="form-control" placeholder="Your Message" x-webkit-speech />
+              <span class="input-group-btn">
+                <button class="btn btn-info" type="submit">Send</button>
+              </span>
+            </div>
+            <input id="voice-control" type="checkbox" class="hidden" />
+            <label for="voice-control" class="microphone"><span class="sr-only">Use voice control</span></label>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script id="msg-template" type="text/x-handlebars-template">
+    <li class="media">
+      <div class="media-body">
+        <div class="media">
+          <div class="pull-left" href="#">
+            <img class="media-object img-circle" src="{{avatar}}" />
+          </div>
+          <div class="media-body">
+            <p>{{message}}</p>
+            <footer class="small text-muted">{{name}} | {{date}}</footer>
+          </div>
+        </div>
+      </div>
+      <hr />
+    </li>
+  </script>
+  <script src="/bundle.js"></script>
+</body>
+</html>
