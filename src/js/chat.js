@@ -6,15 +6,32 @@ const msgOutput = document.getElementById('msg-output');
 
 const infiniteScroll = document.getElementById('infinite-scroll');
 
+const iframe = document.getElementById('framed-content');
+
 const msgTemplate = Handlebars.compile(document.getElementById('msg-template').innerHTML);
+
+const parseUrl = (text = '') => {
+  var urlRegex = /(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w\.-]*)*\/?/,
+    url = text.match(urlRegex);
+  return {
+    url: url ? url[0] : null,
+    text: text.replace(/<\/?[^>]+(>|$)/g, '')
+  }
+}
 
 const message = (msg, user) => {
   const timestamp = new Date().toLocaleString();
 
   const template = document.createElement('template');
 
+  const parsedMsg = parseUrl(msg);
+
+  if (parsedMsg.url) {
+    iframe.src = parsedMsg.url;
+  }
+
   template.innerHTML = msgTemplate({
-    message: msg,
+    message: parsedMsg.text,
     avatar: user.avatar,
     name: user.name,
     date: timestamp
